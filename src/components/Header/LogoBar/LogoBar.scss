@@ -1,0 +1,235 @@
+// import mixins
+
+@use "../../../sass/helpers/mixins" as *;
+
+@use "../../../sass/helpers/variables" as *;
+
+.header-section {
+  h1 {
+    a {
+      color: #fff;
+    }
+  }
+  &.head-fixed {
+    .box-cart {
+      background: transparent;
+      box-shadow: none;
+      backdrop-filter: none;
+      border: 1px solid #757575;
+    }
+  }
+}
+
+.main-navigationbar {
+  @include max-breakpoint(screen-lg) {
+    padding: 10px 0;
+    border-bottom: 1px solid #757575;
+    height: 75.5px;
+    &::before {
+      background: linear-gradient(
+        153.32deg,
+        rgba(255, 255, 255, 0.3) -65.62%,
+        rgba(255, 255, 255, 0.1) 83.28%
+      );
+      -webkit-backdrop-filter: blur(15px);
+      backdrop-filter: blur(15px);
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      @include box-shadow(0px 4px 24px -1px rgba(0, 0, 0, 0.2));
+      @include transition(0.3s);
+    }
+    .nav-mobile {
+      .navigation {
+        position: fixed !important;
+        padding: 30px 0 !important;
+        bottom: 0;
+        left: 0;
+        order: 2;
+        height: calc(100% - 75.5px);
+        width: 60%;
+        flex-direction: column;
+        justify-content: flex-start !important;
+        z-index: 999;
+        align-items: flex-start !important;
+        backdrop-filter: blur(30px);
+        opacity: 0;
+        @include border-radius(0px);
+        @include transform(translateX(-100%));
+        @include transition(0.5s);
+        &.open {
+          opacity: 1;
+          @include transform(none);
+        }
+        @include max-breakpoint(screen-sm) {
+          width: 100%;
+        }
+      }
+    }
+    ul {
+      order: 2;
+    }
+  }
+  .Logo {
+    @include max-breakpoint(screen-lg) {
+      order: 1;
+    }
+    @include max-breakpoint(screen-sm) {
+      order: 0;
+    }
+  }
+  .icon-bar {
+    width: 55px;
+    height: 55px;
+    background-color: $main_color;
+    cursor: pointer;
+    @include transition(0.5s);
+    @include min-breakpoint(screen-lg) {
+      display: none !important;
+    }
+    @include max-breakpoint(screen-sm) {
+      div {
+        align-items: flex-end !important;
+      }
+    }
+    span {
+      height: 2px;
+      background-color: #fff;
+      @include transition(0.3s);
+      &:last-of-type {
+        width: 60%;
+      }
+      &:nth-child(2) {
+        width: 80%;
+      }
+    }
+    &.active {
+      div {
+        @include transform(rotate(0deg));
+      }
+      span {
+        &:nth-child(2) {
+          display: none;
+        }
+        &:last-of-type,
+        &:first-of-type {
+          position: absolute;
+          width: 100%;
+          @include transform(rotate(45deg));
+        }
+        &:first-of-type {
+          @include transform(rotate(-45deg));
+        }
+      }
+    }
+  }
+  .header-control {
+    @include between-breakpoints(768px, 1100px) {
+      order: 2;
+    }
+    @include max-breakpoint(screen-sm) {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-top: 1px solid #757575;
+      background: linear-gradient(
+        153.32deg,
+        rgba(255, 255, 255, 0.3) -65.62%,
+        rgba(255, 255, 255, 0.1) 83.28%
+      );
+      @include box-shadow(0px 4px 24px -1px rgba(0, 0, 0, 0.2));
+      > ul {
+        width: 100%;
+        justify-content: space-between !important;
+        padding: 8px 15px !important;
+      }
+      > ul::before {
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        -webkit-backdrop-filter: blur(15px);
+        backdrop-filter: blur(15px);
+      }
+    }
+    .user-list {
+      left: 10px;
+      visibility: hidden;
+      overflow: hidden;
+      opacity: 0;
+      padding: 15px 0 !important;
+      background: linear-gradient(
+        153.32deg,
+        rgba(255, 255, 255, 0.3) -65.62%,
+        rgba(255, 255, 255, 0.1) 83.28%
+      );
+      box-shadow: 0px 4px 24px -1px rgba(0, 0, 0, 0.2);
+      -webkit-backdrop-filter: blur(15px);
+      backdrop-filter: blur(15px);
+      margin-top: 14px;
+      @include border-radius(10px);
+      @include transform(scale(0.9));
+      @include transition(
+        opacity 0.25s ease-in-out,
+        transform 0.25s ease-in-out,
+        visibility 0.25s ease-in-out
+      );
+      &.open {
+        visibility: visible;
+        opacity: 1;
+        @include transform(scale(1.001));
+        @include transition(
+          opacity 0.4s cubic-bezier(0, 1, 0.4, 1),
+          transform 0.4s cubic-bezier(0.18, 1.25, 0.4, 1),
+          visibility 0.4s linear
+        );
+      }
+      a {
+        display: block;
+        width: 100%;
+        padding: 8px 40px;
+      }
+      @include max-breakpoint(screen-sm) {
+        top: -122px;
+        margin-top: 0 !important;
+        left: 5px;
+      }
+    }
+    .box-cart {
+      background: linear-gradient(
+        153.32deg,
+        rgba(255, 255, 255, 0.3) -65.62%,
+        rgba(255, 255, 255, 0.1) 83.28%
+      );
+      -webkit-backdrop-filter: blur(15px);
+      backdrop-filter: blur(15px);
+      color: #fff;
+      border: 1px solid transparent;
+      @include box-shadow(0px 4px 24px -1px rgba(0, 0, 0, 0.2));
+      @include max-breakpoint(screen-lg) {
+        background: transparent;
+        box-shadow: none;
+        backdrop-filter: none;
+        border: 1px solid #757575;
+      }
+      span {
+        font-size: 13px;
+      }
+      a {
+        background-color: $main_color;
+        padding: 18px 15px;
+        width: 55px;
+      }
+    }
+    .user-icon {
+      background-color: $main_color;
+      height: 55px;
+      width: 55px;
+      @include transition(0.3s);
+    }
+  }
+}

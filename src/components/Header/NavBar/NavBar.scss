@@ -1,0 +1,207 @@
+// import mixins
+
+@use "../../../sass/helpers/mixins" as *;
+
+@use "../../../sass/helpers/variables" as *;
+
+.header-section {
+  .navigation {
+    width: 452px;
+    &:not(.nav-mobile .navigation) {
+      @include max-breakpoint(screen-lg) {
+        display: none !important;
+      }
+      .close-icon {
+        color: #fff;
+        cursor: pointer;
+        left: -40px;
+        z-index: 11;
+        visibility: hidden;
+        height: 30px;
+        width: 30px;
+        @include transition(0.3s);
+        @include transform(translateY(-50%) rotate(45deg));
+        &:hover {
+          color: $main_color;
+        }
+      }
+      &.openSearch {
+        @include min-breakpoint(screen-lg) {
+          & .close-icon {
+            opacity: 1 !important;
+            visibility: visible;
+          }
+          & li:nth-child(2) {
+            width: 100%;
+            z-index: 10;
+          }
+          & li input {
+            width: 100%;
+          }
+        }
+      }
+    }
+    &::before {
+      position: absolute;
+      content: "";
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        153.32deg,
+        rgba(255, 255, 255, 0.3) -65.62%,
+        rgba(255, 255, 255, 0.1) 83.28%
+      );
+      -webkit-backdrop-filter: blur(15px);
+      backdrop-filter: blur(15px);
+      z-index: -1;
+      @include box-shadow(0px 4px 24px -1px rgba(0, 0, 0, 0.2));
+      @include border-radius(30px);
+    }
+    &::after {
+      position: absolute;
+      content: "";
+      top: 0;
+      left: 0;
+      background: #161829;
+      width: 100%;
+      height: 100%;
+      opacity: 0.3;
+      z-index: -2;
+      @include border-radius(30px);
+    }
+    @include max-breakpoint(screen-lg) {
+      &::after {
+        @include border-radius(0px);
+        opacity: 0.4;
+      }
+      &::before {
+        @include border-radius(0px);
+      }
+    }
+    > li {
+      @include max-breakpoint(screen-lg) {
+        width: 100%;
+        margin: 10px 0;
+      }
+      &:first-of-type {
+        div {
+          padding: 18px 15px;
+          background-color: $main_color;
+          color: #fff;
+          width: 55px;
+          cursor: pointer;
+          @include transition(0.3s);
+          @include max-breakpoint(screen-lg) {
+            background-color: transparent;
+            z-index: 2;
+            @include transition(0s);
+            svg {
+              font-size: 20px;
+            }
+            cursor: default;
+          }
+        }
+        @include max-breakpoint(screen-lg) {
+          position: absolute !important;
+          left: auto !important;
+          height: 50px !important;
+          width: 50px !important;
+          background-color: transparent;
+          cursor: auto;
+          left: 30px !important;
+        }
+      }
+      &:nth-child(2) {
+        @include min-breakpoint(screen-lg) {
+          position: absolute;
+          left: 0;
+          height: 100%;
+          width: 55px;
+          z-index: -1;
+          @include transition(0.3s);
+          @include border-radius(80px);
+        }
+        @include max-breakpoint(screen-lg) {
+          height: 50px;
+          padding: 0 30px;
+        }
+      }
+      input {
+        color: #fff;
+        background: $main_color;
+        padding: 8px 20px 10px;
+        outline: none;
+        z-index: -1;
+        cursor: text;
+        @include transition(0.3s);
+        &::placeholder {
+          color: #fff;
+          font-size: 14px;
+          letter-spacing: 1px;
+        }
+        @include max-breakpoint(screen-lg) {
+          position: relative !important;
+          padding: 8px 45px 10px 55px;
+          background: linear-gradient(
+            153.32deg,
+            rgba(255, 255, 255, 0.3) -65.62%,
+            rgba(255, 255, 255, 0.1) 83.28%
+          );
+          -webkit-backdrop-filter: blur(15px);
+          backdrop-filter: blur(15px);
+          z-index: 1;
+          @include box-shadow(0px 4px 24px -1px rgba(0, 0, 0, 0.2));
+          @include transition(0s);
+        }
+      }
+    }
+    li {
+      a {
+        padding: 16px 18px;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+
+      li {
+        width: 100%;
+        a {
+          padding: 8px 40px;
+          padding-right: 50px;
+        }
+      }
+
+      &:has(> .close-icon) {
+        @include max-breakpoint(screen-lg) {
+          display: none;
+        }
+      }
+    }
+  }
+  &.head-fixed {
+    .navigation {
+      &::before,
+      &::after {
+        @include min-breakpoint(screen-lg) {
+          display: none !important;
+        }
+      }
+    }
+  }
+}
+.dropdown {
+  display: none;
+  opacity: 0;
+  z-index: 1;
+  padding: 15px 0 !important;
+  background: linear-gradient(
+    153.32deg,
+    rgba(255, 255, 255, 0.3) -65.62%,
+    rgba(255, 255, 255, 0.1) 83.28%
+  );
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  @include box-shadow(0px 4px 24px -1px rgba(0, 0, 0, 0.2));
+  @include transition(opacity 0.3s ease-in-out);
+}
