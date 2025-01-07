@@ -145,9 +145,7 @@ function Footer(props) {
           <div className="container-xl">
             <div className="d-flex align-item center justify-content-between">
               <div className="copyright ">
-                <p>
-                  Copyright Playtopia | Built with Playtopia by TechnonicThemes.
-                </p>
+                <p>Copyright Playtopia | Built with ❤️ by Ammar Ali.</p>
               </div>
               <div className="payment-method "></div>
             </div>
